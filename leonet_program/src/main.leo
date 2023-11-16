@@ -1,8 +1,139 @@
-// The 'leonet_program' program.
 program leonet_program.aleo {
+
+    struct User {
+        a: u8,
+        b: bool
+        f: field
+        g: group
+    }
+    struct Post {
+    text: scalar
+    }
+    mapping users: address => User;
+
+    transition test (public el: [u8; 5]) -> [u8;5] {
+        return el;
+    }
+
     transition main(public a: u32, b: u32) -> u32 {
         let c: u32 = a + b;
         let u: u32 = 23u32;
         return c;
     }
 }
+
+// contract Social {
+
+//     /*********/
+//     //GLOBAL DATA
+//     /*********/
+
+//     //Address to Users
+//     mapping(address => User) users;
+
+//     /*********/
+//     //USER DATA
+//     /*********/
+
+//     struct User {
+//         string name;
+//         bool registered;
+//         structAddress[] following;
+//         structAddress[] followers;
+//         Post[] posts;
+//     }
+
+//     struct Post {
+//         string text;
+//     }
+
+//     struct structAddress {
+//         address addr;
+//     }
+
+//     /*********/
+//     //USER FUNCTIONS
+//     /*********/
+
+//     fn registerUser(string name_) {
+//         address msgSender = caller_address();
+//         User storage newUser = users[msgSender];
+//         assert(newUser.registered == false);
+
+//         //Initialize
+//         newUser.name = name_;
+//         newUser.registered = true;
+//     }
+
+//     fn getUserName(address address_) -> (string) {
+//         return(users[address_].name);
+//     }
+
+//     fn changeName(string name_) {
+//         address msgSender = caller_address();
+//         User storage sender = users[msgSender];
+//         sender.name = name_;
+//     }
+
+//      fn follow(address otherAddress) {
+//         address msgSender = caller_address();
+//         User storage sender = users[msgSender];
+//         User storage otherUser = users[otherAddress];
+//         //sender is now following otherAddress
+//         sender.following.push(structAddress({addr: otherAddress}));
+//         //otherUser is now followed by msgSender
+//         otherUser.followers.push(structAddress({addr: msgSender}));
+//     }
+
+//     fn checkFirstFollowsSecond(address firstAddr, address secondAddr) -> (bool) {
+//         User storage firstUser = users[firstAddr];
+//         for (u32 i = 0; i < firstUser.following.length; i++) {
+//             if (secondAddr == firstUser.following[i].addr) {
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+
+//     fn checkFriendship(address addrOne, address addrTwo) -> (bool) {
+//         bool forward = checkFirstFollowsSecond(addrOne, addrTwo);
+//         bool backward = checkFirstFollowsSecond(addrTwo, addrOne);
+//         //return (forward && backward);
+//         if (forward == true) {
+//             if (backward == true) {return true;} {return false;}
+//         }
+//         return false;
+//     }
+
+//     /*********/
+//     //POST DATA
+//     /*********/
+
+//     fn post(string text_) {
+//         address msgSender = caller_address();
+//         User storage sender = users[msgSender];
+//         sender.posts.push(Post({text: text_}));
+//     }
+
+//     fn getPost(address address_, u32 postIndex) -> (string) {
+//         User storage poster = users[address_];
+//         return poster.posts[postIndex].text;
+//     }
+
+//     fn getLatestPost(address address_) -> (string) {
+//         User storage poster = users[address_];
+//         u32 latestPostIndex = poster.posts.length - 1;
+//         return poster.posts[latestPostIndex].text;
+//     }
+
+//     fn getNewsfeed() {
+//         address msgSender = caller_address();
+//         User storage sender = users[msgSender];
+
+//         for (u32 i = 0; i < sender.following.length; i++) {
+//             address otherAddress = sender.following[i].addr;
+//             print(users[otherAddress].name);
+//             print(getLatestPost(otherAddress));
+//         }
+//     }
+// }
