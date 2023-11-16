@@ -15,8 +15,8 @@ const main = async () => {
   const singleLineText = convertToSingleLine(leonet_program);
 
   // Write to TypeScript file
-  const fileContent = `export const oneliner = "${singleLineText}";`;
-  await writeFile("output.ts", fileContent);
+  const fileContent = `export const leonet_program = "${singleLineText}";`;
+  await writeFile("../src/lib/leonet_program.ts", fileContent);
   console.log("File written successfully.");
 };
 
