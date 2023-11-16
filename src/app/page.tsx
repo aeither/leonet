@@ -1,10 +1,10 @@
 "use client";
 
+import { Toaster } from "@/components/ui/toaster";
+import { PrivateKey } from "@aleohq/sdk";
 import Image from "next/image";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
-import { Toaster } from "@/components/ui/toaster";
 import { useAleoWASM } from "../aleo-wasm-hook";
-import { PrivateKey } from "@aleohq/sdk";
 
 export default function Home() {
   const [account, setAccount] = useState(null);
