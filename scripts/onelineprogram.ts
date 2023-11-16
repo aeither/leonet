@@ -1,5 +1,6 @@
-import { writeFile } from "fs/promises";
-import leonet_program from "../leonet_program/build/main.aleo?raw";
+import { readFile, writeFile } from "fs/promises";
+
+const filePath = "../leonet_program/build/main.aleo";
 
 function convertToSingleLine(text: string) {
   // Remove line breaks and extra white spaces
@@ -9,24 +10,21 @@ function convertToSingleLine(text: string) {
 }
 
 const main = async () => {
-  const multilineText = `This is a
-    multiline
-    plain text.`;
+  const leonet_program = await readFile(filePath, "utf-8");
 
-  const singleLineText = convertToSingleLine(multilineText);
+  const singleLineText = convertToSingleLine(leonet_program);
 
   // Write to TypeScript file
   const fileContent = `export const oneliner = "${singleLineText}";`;
-  writeFile("output.ts", fileContent)
-    .then(() => console.log("File written successfully."))
-    .catch((err) => console.error("Error writing file:", err));
+  await writeFile("output.ts", fileContent);
+  console.log("File written successfully.");
 };
 
 main()
-  .then(async () => {
-    console.log("Converstion Success");
+  .then(() => {
+    console.log("Conversion Success");
   })
-  .catch(async (e) => {
+  .catch((e) => {
     console.error(e);
     process.exit(1);
   });
