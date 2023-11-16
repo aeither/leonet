@@ -3,6 +3,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { Toaster } from "@/components/ui/toaster";
+import { useAleoWASM } from "../aleo-wasm-hook";
 import { PrivateKey } from "@aleohq/sdk";
 
 export default function Home() {
@@ -12,11 +14,12 @@ export default function Home() {
   const [signingKey, setSigningKey] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const textEncoder = new TextEncoder();
+  const [aleo] = useAleoWASM();
 
   const onKeyChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSigningAccount(null);
     try {
-      setSigningAccount(PrivateKey.from_string(event.target.value));
+      setSigningAccount(aleo.PrivateKey.from_string(event.target.value));
     } catch (error) {
       console.error(error);
     } finally {
@@ -81,6 +84,9 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div>hello</div>
+      <Toaster />
+
       <div>
         <input
           name="privateKey"
