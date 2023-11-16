@@ -1,15 +1,12 @@
+import { leonet_program } from "@/lib/leonet_program";
 import {
   Account,
   initThreadPool,
   PrivateKey,
   ProgramManager,
 } from "@aleohq/sdk";
-// import leonet_program from "../../leonet_program/build/main.aleo?raw";
 
 await initThreadPool();
-
-const leonet_program =
-  "program leonet_program.aleo; function hello: input r0 as u32.public; input r1 as u32.private; add r0 r1 into r2; output r2 as u32.private; ";
 
 async function localProgramExecution() {
   const programManager = new ProgramManager(undefined, undefined, undefined);
@@ -20,7 +17,7 @@ async function localProgramExecution() {
 
   const executionResponse = await programManager.run(
     leonet_program,
-    "hello",
+    "main",
     ["5u32", "5u32"],
     false
   );
