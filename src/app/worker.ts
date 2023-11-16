@@ -4,17 +4,12 @@ import {
   PrivateKey,
   ProgramManager,
 } from "@aleohq/sdk";
+// import leonet_program from "../../leonet_program/build/main.aleo?raw";
 
 await initThreadPool();
 
-const hello_hello_program =
-    "program hello_hello.aleo;\n" +
-    "\n" +
-    "function hello:\n" +
-    "    input r0 as u32.public;\n" +
-    "    input r1 as u32.private;\n" +
-    "    add r0 r1 into r2;\n" +
-    "    output r2 as u32.private;\n";
+const leonet_program =
+  "program leonet_program.aleo; function hello: input r0 as u32.public; input r1 as u32.private; add r0 r1 into r2; output r2 as u32.private; ";
 
 async function localProgramExecution() {
   const programManager = new ProgramManager(undefined, undefined, undefined);
@@ -24,10 +19,10 @@ async function localProgramExecution() {
   programManager.setAccount(account);
 
   const executionResponse = await programManager.run(
-      hello_hello_program,
-      "hello",
-      ["5u32", "5u32"],
-      false,
+    leonet_program,
+    "hello",
+    ["5u32", "5u32"],
+    false
   );
   return executionResponse.getOutputs();
 }
@@ -39,9 +34,9 @@ function getPrivateKey() {
 onmessage = async function (e) {
   if (e.data === "execute") {
     const result = await localProgramExecution();
-    postMessage({type: "execute", result: result});
+    postMessage({ type: "execute", result: result });
   } else if (e.data === "key") {
     const result = getPrivateKey();
-    postMessage({type: "key", result: result});
+    postMessage({ type: "key", result: result });
   }
 };

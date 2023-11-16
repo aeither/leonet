@@ -1,0 +1,1 @@
+export const oneliner = "This is a multiline plain text.";
