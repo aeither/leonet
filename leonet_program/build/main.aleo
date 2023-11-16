@@ -1,4 +1,3 @@
-// The 'leonet_program.aleo' program.
 program leonet_program.aleo;
 
 function hello:
