@@ -1,18 +1,27 @@
+// leo run test "[72u8, 101u8, 108u8, 108u8, 111u8 ]"
+// leo execute check (exec)
+
 program leonet_program.aleo {
 
     struct User {
-        a: u8,
-        b: bool
-        f: field
-        g: group
+        score: u64,
+        username: [u8; 32]
     }
+
     struct Post {
-    text: scalar
+        text: scalar
     }
+
     mapping users: address => User;
 
-    transition test (public el: [u8; 5]) -> [u8;5] {
+    transition username (public el: [u8; 32]) -> [u8;32] {
         return el;
+    }
+
+    transition check () -> u8 {
+        assert_eq(self.caller, aleo1t0uer3jgtsgmx5tq6x6f9ecu8tr57rzzfnc2dgmcqldceal0ls9qf6st7a);
+
+        return 23u8;
     }
 
     transition main(public a: u32, b: u32) -> u32 {
@@ -20,6 +29,24 @@ program leonet_program.aleo {
         let u: u32 = 23u32;
         return c;
     }
+
+    
+
+    // transition update_score(user_id: field, new_score: u64) {
+    //     assert_eq(self.caller, self.signer);
+    //     return then finalize(user_id, new_score);
+    // }
+
+    // finalize update_score(user_id: field, new_score: u64) {
+    //     let current_user: User = Mapping::get_or_use(users, user_id, User {
+    //         score: 0u64,
+    //     });
+
+    //     Mapping::set(users, user_id, User {
+    //         score: current_user.score + new_score,
+    //         games_played: current_user.games_played + 1u64
+    //     });
+    // }
 }
 
 // contract Social {
