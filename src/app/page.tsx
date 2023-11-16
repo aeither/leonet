@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./page.module.css";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { useAleoWASM } from "../aleo-wasm-hook";
@@ -83,7 +82,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
+    <main>
       <div>hello</div>
       <Toaster />
 
@@ -95,16 +94,15 @@ export default function Home() {
         />
       </div>
 
-      <div className={styles.description}>
+      <div>
         <p>
           Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
+          <code>src/app/page.tsx</code>
         </p>
       </div>
 
-      <div className={styles.center}>
+      <div>
         <Image
-          className={styles.logo}
           src="/next.svg"
           alt="Next.js Logo"
           width={180}
@@ -112,7 +110,6 @@ export default function Home() {
           priority
         />
         <Image
-          className={styles.logo}
           src="/aleo.svg"
           alt="Next.js Logo"
           width={180}
@@ -120,8 +117,7 @@ export default function Home() {
           priority
         />
       </div>
-
-      <div className={styles.card}>
+      <div>
         <p>
           <button onClick={generateAccount}>
             {account
