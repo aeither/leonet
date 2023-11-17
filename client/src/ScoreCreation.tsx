@@ -1,12 +1,12 @@
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { getUserMappingId } from "./db";
-import { Page } from "./utils";
 import { FC, useState } from "react";
+import { convertToUtf8 } from "./lib/utils";
+import { Page } from "./utils";
 import { workerClient } from "./worker-client";
 
 interface Props {
@@ -26,13 +26,20 @@ export const ScoreCreationPage: FC<Props> = ({ setPage }) => {
 
       if (!un || !sc) throw new Error("Missing inputs");
 
-      const username = un.toString();
+      // const username = un.toString();
       const score = parseInt(sc.toString());
 
-      const mappingId = getUserMappingId(username);
-      await workerClient.updateScore({ userId: mappingId, score });
+      // const mappingId = getUserMappingId(username);
 
-      console.log(`${username} stored with id ${mappingId}`);
+      const username = convertToUtf8("vitalik");
+      await workerClient.updateScore({
+        username,
+        avatar: 0,
+        userId: 123, // should be udaated with signature
+        score,
+      });
+
+      // console.log(`${username} stored with id ${mappingId}`);
     } catch (error) {
       console.error("On submit error:", error);
     }

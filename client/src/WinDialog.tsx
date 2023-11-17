@@ -1,5 +1,3 @@
-import { Copy } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,37 +11,76 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { convertToUtf8 } from "./lib/utils";
+import { workerClient } from "./worker-client";
 
-export function WinDialog() {
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+export function WinDialog({ score }: { score: number }) {
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState(0);
+
+  const onSubmit = async () => {
+    const usernameArray = convertToUtf8(username);
+    await workerClient.updateScore({
+      username: usernameArray,
+      avatar,
+      userId: 123, // should be udaated with signature
+      score,
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
+        <Button variant="outline">Save</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogTitle>Save on-chain</DialogTitle>
+          <DialogDescription>Share your record on-chain</DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
-              Link
-            </Label>
+            <Label>Username</Label>
             <Input
-              id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
-              readOnly
+              id="username"
+              defaultValue="vitalik"
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <Button type="submit" size="sm" className="px-3">
-            <span className="sr-only">Copy</span>
-            <Copy className="h-4 w-4" />
-          </Button>
         </div>
+        <Select
+          onValueChange={(value) => setAvatar(Number(value))}
+          defaultValue={"0"}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select a fruit" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Avatars</SelectLabel>
+              <SelectItem value={"0"}>CrimsonRed</SelectItem>
+              <SelectItem value={"1"}>ThunderYellow</SelectItem>
+              <SelectItem value={"2"}>BlueOcean</SelectItem>
+              <SelectItem value={"3"}>PurpleWine</SelectItem>
+              <SelectItem value={"4"}>CitricOrange</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         <DialogFooter className="sm:justify-start">
+          <Button type="button" onClick={() => onSubmit()}>
+            Submit
+          </Button>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Close

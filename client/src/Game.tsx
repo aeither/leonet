@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./components/ui/button";
+import { WinDialog } from "./WinDialog";
 
 const Game: React.FC = () => {
   const [count, setCount] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(60);
   const [gameStarted, setGameStarted] = useState(false);
+  const [setsubmitMode, setSetsubmitMode] = useState(false);
 
   // Function to handle button click
   const handleButtonClick = () => {
@@ -22,6 +24,7 @@ const Game: React.FC = () => {
   // Function to end the game
   const endGame = () => {
     setGameStarted(false);
+    setSetsubmitMode(true);
     alert(`Game Over! Your click count: ${count}`);
   };
 
@@ -45,8 +48,11 @@ const Game: React.FC = () => {
   return (
     <div className="container mx-auto text-center">
       <h1 className="text-3xl font-bold mb-4">ClickMaster</h1>
-
-      <div className="flex justify-center py-4">
+      <p>
+        Click as fast as you can within 1 minute. PD: Currently set to 5 seconds
+        for testing
+      </p>
+      <div className="flex justify-center py-2">
         <img
           src="/clickmaster_banner.jpg"
           alt="Clickmaster Banner"
@@ -54,16 +60,23 @@ const Game: React.FC = () => {
         />
       </div>
 
+      {!gameStarted && setsubmitMode && (
+        <div className="flex w-full justify-center items-center gap-4 p-2 m-2 border rounded-md">
+          <p>{count}</p>
+          <WinDialog score={count} />
+        </div>
+      )}
+
       {!gameStarted ? (
         <Button className="font-bold py-2 px-4 rounded" onClick={startGame}>
           Start
         </Button>
       ) : (
         <>
-          <p className="text-2xl font-bold mb-4">
+          <p className="text-lg font-bold mb-1">
             Time Remaining: {timeRemaining}s
           </p>
-          <p className="text-2xl font-bold mb-4">Points: {count}</p>
+          <p className="text-lg font-bold mb-1">Points: {count}</p>
           <Button
             className="font-bold py-2 px-4 rounded"
             onClick={handleButtonClick}

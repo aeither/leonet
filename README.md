@@ -1,4 +1,13 @@
-# zkleaderboard-aleo
+# Leonet
+
+
+
+# Overview
+
+
+
+
+# Built from zkleaderboard-aleo
 
 Learn how to build and deploy your own leaderboard on-chain, using Aleo's network and Leo language. Demo project used for zkLeaderboard workshop. Part of zkHouse Istanbul during DevConnect 2023.
 
@@ -77,7 +86,3 @@ If your program was deployed successfully, you can run the app:
 ```sh
 pnpm dev
 ```
-
-Navigate to the URL you see in your terminal. Make sure to open your browser console to see all the logs and errors.
-
-✨ Happy hacking! ✨

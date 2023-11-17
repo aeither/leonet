@@ -7,8 +7,8 @@ import {
   ProgramManager,
 } from "@aleohq/sdk";
 
-import { env, wait } from "./utils";
 import { updateScoreArgsSchema } from "./types";
+import { env, wait } from "./utils";
 
 const keyProvider = new AleoKeyProvider();
 keyProvider.useCache(true);
@@ -27,8 +27,11 @@ programManager.setAccount(account);
 
 const workerFunctions = {
   updateScore: async (args: unknown) => {
-    const { userId, score } = updateScoreArgsSchema.parse(args);
+    const { username, avatar, userId, score } =
+      updateScoreArgsSchema.parse(args);
 
+    console.log("🚀 ~ updateScore ~ username:", username);
+    console.log("🚀 ~ updateScore ~ avatar:", avatar);
     console.log("🚀 ~ updateScore ~ userId:", userId);
     console.log("🚀 ~ updateScore ~ score:", score);
 
@@ -41,7 +44,7 @@ const workerFunctions = {
       "update_score",
       0.3,
       false,
-      [`${userId}field`, `${score}u64`],
+      [username.toString(), `${avatar}field`, `${userId}field`, `${score}u64`],
       undefined,
       keySearchParams
     );

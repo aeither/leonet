@@ -1,6 +1,4 @@
-import React from "react";
 import Game from "./Game";
-import { Button } from "./components/ui/button";
 
 const requestDatas = [
   {
@@ -17,12 +15,6 @@ const requestDatas = [
 
 function App() {
   const FirstColumn = () => {
-    const [progress, setProgress] = React.useState(3);
-
-    React.useEffect(() => {
-      const timer = setTimeout(() => setProgress(20), 500);
-      return () => clearTimeout(timer);
-    }, []);
 
     return (
       <div className="h-12">
@@ -43,12 +35,10 @@ function App() {
 
   const CardItem = ({ item }: { item: Item }) => {
     return (
-      <div className="border border-gray-300 rounded-lg p-4">
+      <div className="flex flex-row justify-between border border-gray-300 rounded-lg p-4">
         <h3 className="text-xl font-semibold mb-2">{item.username}</h3>
-        <p className="text-gray-600 mb-4">{item.score}</p>
-        <Button className="rounded-md" onClick={() => console.log("test")}>
-          Vote
-        </Button>
+        <p className="text-gray-600 mb-4 text-lg font-bold shadow hover:shadow-md">{item.score}</p>
+       
       </div>
     );
   };
@@ -61,7 +51,10 @@ function App() {
           <FirstColumn />
         </div>
         <div className="col-span-2 bg-card p-4 border shadow-md rounded-md">
-          <div className="grid grid-cols-2 gap-4 pt-2">
+          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+            Leaderboard
+          </h2>
+          <div className="grid grid-cols-1 gap-4 pt-2">
             {requestDatas.map((item) => (
               <CardItem key={item.id} item={item} />
             ))}
