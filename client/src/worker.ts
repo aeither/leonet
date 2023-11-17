@@ -44,7 +44,7 @@ const workerFunctions = {
       "update_score",
       0.3,
       false,
-      [username.toString(), `${avatar}field`, `${userId}field`, `${score}u64`],
+      [`"${username}"`, `${avatar}field`, `${userId}field`, `${score}u64`],
       undefined,
       keySearchParams
     );
