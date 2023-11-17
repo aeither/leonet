@@ -3,7 +3,41 @@
 // leo execute check (exec)
 // import board.leo;
 
+// TODOs:
+// profile pic, 
+
 program leonet_program.aleo {
+
+     struct User {
+        username: [u8; 32];
+        avatar: u8; // can hold 256
+        score: u64;
+        games_played: u64;
+    }
+
+    mapping users: field => User;
+
+    // leo run update_score  "[ "72u8", "101u8", "108u8", "108u8", "111u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8" ]" 123field 12u64
+    transition update_score(username: [u8; 32], avatar: u8, user_id: field, new_score: u64) {
+        assert_eq(self.caller, self.signer);
+        return then finalize(username, avatar, user_id, new_score);
+    }
+
+    finalize update_score(username: [u8; 32], avatar: u8, user_id: field, new_score: u64) {
+        let current_user: User = Mapping::get_or_use(users, user_id, User {
+            username: username,
+            avatar: 0u8,
+            score: 0u64,
+            games_played: 0u64
+        });
+
+        Mapping::set(users, user_id, User {
+            username: username,
+            avatar: 0u8,
+            score: current_user.score + new_score,
+            games_played: current_user.games_played + 1u64
+        });
+    }
 
     record Token {
         owner: address,
@@ -17,11 +51,6 @@ program leonet_program.aleo {
             amount: amount,
         };
     }
-
-    // struct User {
-    //     score: u64,
-    //     username: [u8; 32]
-    // }
 
     // struct Post {
     //     text: scalar
