@@ -35,12 +35,12 @@ const deploy = async () => {
     programManager.setAccount(account);
 
     // Define a fee to pay to deploy the program
-    const fee = 2.1;
+    const fee = 3.8;
 
     const program = await readFile(
       "../programs/leaderboard/build/main.aleo",
       "utf-8"
-    ).then((p) => p.replaceAll("leaderboard.aleo", ALEO_PROGRAM_NAME));
+    ).then((p) => p.replaceAll("leonet_program.aleo", ALEO_PROGRAM_NAME));
 
     const txId = await programManager.deploy(program, fee, false);
 
