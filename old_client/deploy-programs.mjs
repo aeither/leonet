@@ -9,7 +9,7 @@ import {
 
 const deploy = async () => {
   try {
-    const ALEO_NETWORK_URL = process.env.VITE_NETWORK_URL;
+    const ALEO_NETWORK_URL = "127.0.0.1:5001";
     const ALEO_PRIVATE_KEY = process.env.VITE_PRIVATE_KEY;
     const ALEO_PROGRAM_NAME = process.env.VITE_PROGRAM_NAME;
 

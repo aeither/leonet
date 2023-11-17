@@ -4,7 +4,7 @@
 // import board.leo;
 
 // TODOs:
-// profile pic, get leaderboard, counter, check, obscura
+// profile pic, get leaderboard, counter, check, obscura, frontend interaction
 
 program leonet_program.aleo {
 
@@ -17,9 +17,21 @@ program leonet_program.aleo {
 
     mapping users: field => User;
 
+    // we have user public key, user id, signature
+    // we store user id with signature so 
+    // we can verify with public key with the user id against the signature
+    // i should be able to use mapping or array
+    // array for counting the total amount
+    // mapping for id to signature
+    // this is a another transition. if verify successful, the user can can update the username
+    // update score should only be done by the admin to avoid cheating
+
     // leo run update_score  "[ "72u8", "101u8", "108u8", "108u8", "111u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8" ]" 123field 12u64
     transition update_score(username: [u8; 32], avatar: u8, user_id: field, new_score: u64) {
-        assert_eq(self.caller, self.signer);
+        // assert_eq(self.caller, self.signer);
+
+        // Make sure the caller is the the admin
+        assert_eq(self.caller, aleo1g9mjvdz3n9xf224zhwj5ns6xr3jvx6s0mfawnnna584unhwlyggs7vpvnr);
         return then finalize(username, avatar, user_id, new_score);
     }
 
@@ -38,6 +50,8 @@ program leonet_program.aleo {
             games_played: current_user.games_played + 1u64
         });
     }
+
+    // TODO: Update profile
 
     record Token {
         owner: address,

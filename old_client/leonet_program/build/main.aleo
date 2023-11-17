@@ -22,6 +22,7 @@ function update_score:
     input r3 as u64.private;
     assert.eq self.caller self.signer;
     async update_score r0 r1 r2 r3 into r4;
+    output 3u8 as u8.private;
     output r4 as leonet_program.aleo/update_score.future;
 
 finalize update_score:
