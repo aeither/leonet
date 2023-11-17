@@ -5,6 +5,7 @@
 
 // TODOs:
 // frontend interaction: get leaderboard
+// set score by admin
 // profile pic, counter, check, obscura, 
 
 program leonet_program.aleo {
@@ -33,11 +34,11 @@ program leonet_program.aleo {
 
     // leo run update_score  "[ "72u8", "101u8", "108u8", "108u8", "111u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8" ]" 123field 12u64
     transition update_score(username: [u8; 32], avatar: u8, user_id: field, new_score: u64) {
-        assert_eq(self.caller, self.signer);
+        // assert_eq(self.caller, self.signer);
 
         // Make sure the caller is the the admin
         // Error: 'leonet_program.aleo/update_score' is not satisfied on the given inputs (16543 constraints)
-        // assert_eq(self.caller, aleo1g9mjvdz3n9xf224zhwj5ns6xr3jvx6s0mfawnnna584unhwlyggs7vpvnr);
+        assert_eq(self.caller, aleo1g9mjvdz3n9xf224zhwj5ns6xr3jvx6s0mfawnnna584unhwlyggs7vpvnr);
         return then finalize(username, avatar, user_id, new_score);
     }
 
