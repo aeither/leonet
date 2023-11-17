@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "contract:build": "cd leonet_program && leo build && cd ../scripts && bun onelineprogram.ts",
-    "test": "sh test.sh"
+    "test": "sh test.sh",
+    "deploy": "dotenv node deploy-programs.mjs"
   },
   "dependencies": {
     "@aleohq/sdk": "^0.6.2",
@@ -18,6 +19,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "dotenv-cli": "^7.3.0",
     "lucide-react": "^0.292.0",
     "next": "13.5.4",
     "react": "^18",

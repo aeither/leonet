@@ -4,7 +4,7 @@
 // import board.leo;
 
 // TODOs:
-// profile pic, 
+// profile pic, get leaderboard, counter, check, obscura
 
 program leonet_program.aleo {
 
