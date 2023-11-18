@@ -1,19 +1,59 @@
+import { useEffect, useState } from "react";
 import Game from "./Game";
 
-const requestDatas = [
-  {
-    id: 1,
-    username: "vitalik",
-    score: "23",
-  },
-  {
-    id: 2,
-    username: "buterin",
-    score: "31",
-  },
-];
+const parseUserStruct = (struct: string, username: string) => {
+  const lines = struct.split("\n");
+
+  let score: number | undefined;
+  let gamesPlayed: number | undefined;
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+
+    const parseU64 = (val: string) =>
+      val.split(":")[1].trim().replace(",", "").replace("u64", "");
+
+    if (trimmed.startsWith("score")) {
+      const value = parseU64(trimmed);
+      score = parseInt(value);
+      return;
+    }
+
+    if (trimmed.startsWith("games_played")) {
+      const value = parseU64(trimmed);
+      gamesPlayed = parseInt(value);
+      return;
+    }
+  });
+
+  if (!score || !gamesPlayed) throw new Error("Failed parsing Aleo struct");
+
+  return { id: 0, score, gamesPlayed, username, position: 0 }; // position will be calculated later
+};
 
 function App() {
+  const [leaderboard, setLeaderboard] = useState<Item[]>();
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      const data = await fetch(
+        "https://aleo.obscura.network/v1/201d4fc4-8194-4462-90dd-6f31d8e278c4/testnet3/program/leaderboard_123122.aleo/mapping/users/1field"
+      );
+      const jsonData = await data.json();
+      console.log(jsonData);
+
+      if (!jsonData) {
+        return;
+      }
+      // {
+      // score: 122u64,
+      // games_played: 1u64
+      // }
+      setLeaderboard([parseUserStruct(jsonData, "leo") as any]);
+      console.log(jsonData);
+    };
+    fetchLeaderboard();
+  }, []);
+
   const FirstColumn = () => {
     return (
       <div className="h-12">
@@ -36,8 +76,9 @@ function App() {
     return (
       <div className="flex flex-row justify-between border border-gray-300 rounded-lg p-4">
         <h3 className="text-xl font-semibold mb-2">{item.username}</h3>
-        <p className="text-gray-600 mb-4 text-lg font-bold shadow hover:shadow-md">{item.score}</p>
-       
+        <p className="text-gray-600 mb-4 text-lg font-bold shadow hover:shadow-md">
+          {item.score}
+        </p>
       </div>
     );
   };
@@ -54,9 +95,8 @@ function App() {
             Leaderboard
           </h2>
           <div className="grid grid-cols-1 gap-4 pt-2">
-            {requestDatas.map((item) => (
-              <CardItem key={item.id} item={item} />
-            ))}
+            {leaderboard &&
+              leaderboard.map((item) => <CardItem key={item.id} item={item} />)}
           </div>
         </div>
       </div>
