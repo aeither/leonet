@@ -4,6 +4,8 @@ leonet is a mini game platform with a leaderboard where the player address is no
 
 # How it works
 
+![howitworks](https://github.com/aeither/leonet/assets/36173828/8479d76e-9bff-4479-ab3a-8c1c921259a5)
+
 An array to hold an username up to 32 characters.
 Option to select predefined avatar by associating images with number id.
 
@@ -35,7 +37,11 @@ The architecture of the project idea. A zk platform to host casual games competi
 
 # Screenshots
 
+![CleanShot 2023-11-18 at 05 01 58@2x](https://github.com/aeither/leonet/assets/36173828/6d1bb494-1f17-4af5-a0ad-153356f5cd47)
 
+![CleanShot 2023-11-18 at 05 02 21@2x](https://github.com/aeither/leonet/assets/36173828/fac7a969-ce26-4df3-a74a-4aa1e4479eaf)
+
+![CleanShot 2023-11-18 at 05 02 50@2x](https://github.com/aeither/leonet/assets/36173828/e7ada2a1-d974-40fd-85bf-827c8ba6c0d9)
 
 # Built from zkleaderboard-aleo
 
