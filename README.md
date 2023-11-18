@@ -2,6 +2,7 @@
 
 leonet is a mini game platform with a leaderboard where the player address is not revealed. The ClickMaster game is a game where the player has to make the maximum amount of click within 1 minute.
 
+
 # How it works
 
 ![howitworks](https://github.com/aeither/leonet/assets/36173828/8479d76e-9bff-4479-ab3a-8c1c921259a5)
@@ -44,6 +45,12 @@ const data = await fetch(
 The architecture of the project idea. A zk platform to host casual games competitions in leaderboard to win prizes in stablecoin.
 
 ![CleanShot 2023-11-18 at 05 14 22@2x](https://github.com/aeither/leonet/assets/36173828/e378a7b6-087b-4dcf-a115-2c93d8c86377)
+
+# More
+
+https://explorer.hamp.app/transaction?id=at18ufyhhlf7xvv0g6lu9pjq8e32usqdkm8t5afnhxfkm7de427xyzqlcld20
+
+https://explorer.hamp.app/transaction?id=at1urmj78evhrhz2camjyq2a49dz8ufmxmpmlfdd6xjy2q9zpz5j58s0eeljk
 
 # Built from zkleaderboard-aleo
 
