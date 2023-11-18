@@ -31,10 +31,6 @@ const data = await fetch(
 );
 ```
 
-# What next
-
-The architecture of the project idea. A zk platform to host casual games competitions in leaderboard to win prizes in stablecoin.
-
 # Screenshots
 
 ![CleanShot 2023-11-18 at 05 01 58@2x](https://github.com/aeither/leonet/assets/36173828/6d1bb494-1f17-4af5-a0ad-153356f5cd47)
@@ -42,6 +38,12 @@ The architecture of the project idea. A zk platform to host casual games competi
 ![CleanShot 2023-11-18 at 05 02 21@2x](https://github.com/aeither/leonet/assets/36173828/fac7a969-ce26-4df3-a74a-4aa1e4479eaf)
 
 ![CleanShot 2023-11-18 at 05 02 50@2x](https://github.com/aeither/leonet/assets/36173828/e7ada2a1-d974-40fd-85bf-827c8ba6c0d9)
+
+# What next
+
+The architecture of the project idea. A zk platform to host casual games competitions in leaderboard to win prizes in stablecoin.
+
+![CleanShot 2023-11-18 at 05 14 22@2x](https://github.com/aeither/leonet/assets/36173828/e378a7b6-087b-4dcf-a115-2c93d8c86377)
 
 # Built from zkleaderboard-aleo
 
