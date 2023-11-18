@@ -1,11 +1,40 @@
 # Leonet
 
+leonet is a mini game platform with a leaderboard where the player address is not revealed. The ClickMaster game is a game where the player has to make the maximum amount of click within 1 minute.
 
+# How it works
 
-# Overview
+An array to hold an username up to 32 characters.
+Option to select predefined avatar by associating images with number id.
 
-Update score
-at1hqn95u55zp3mrlsggzgev0snsnnhlqgg6a4klkdxvujhzhkunqqq0vxpqn
+```rust
+struct User {
+    username: [u8; 32];
+    avatar: u8;
+    score: u64;
+    games_played: u64;
+}
+```
+
+Update score with username utf-8 encoded
+```bash
+snarkos developer execute --private-key APrivateKey1zkpFykR4fKtyfrQtYuA7wYbNFQsC8qoUqeQt6iT2B44dn9z --query https://aleo.obscura.network/v1/201d4fc4-8194-4462-90dd-6f31d8e278c4 leaderboard_123124.aleo update_score "[ "72u8", "101u8", "108u8", "108u8", "111u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8", "0u8" ]" 0u8 123field 12u64 --broadcast https://aleo.obscura.network/v1/201d4fc4-8194-4462-90dd-6f31d8e278c4/testnet3/transaction/broadcast
+```
+
+Fetching mappings with simple Obscura RPC call.
+
+```ts
+const data = await fetch(
+  "https://aleo.obscura.network/v1/API_KEY/testnet3/program/leaderboard_123122.aleo/mapping/users/1field"
+);
+```
+
+# What next
+
+The architecture of the project idea. A zk platform to host casual games competitions in leaderboard to win prizes in stablecoin.
+
+# Screenshots
+
 
 
 # Built from zkleaderboard-aleo
