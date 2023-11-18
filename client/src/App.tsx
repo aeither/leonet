@@ -15,7 +15,6 @@ const requestDatas = [
 
 function App() {
   const FirstColumn = () => {
-
     return (
       <div className="h-12">
         {/* Main Content */}

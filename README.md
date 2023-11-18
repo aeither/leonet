@@ -4,7 +4,8 @@
 
 # Overview
 
-
+Update score
+at1hqn95u55zp3mrlsggzgev0snsnnhlqgg6a4klkdxvujhzhkunqqq0vxpqn
 
 
 # Built from zkleaderboard-aleo
